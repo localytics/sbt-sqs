@@ -33,9 +33,11 @@ Set the download directory for the jar. Defaults to "elastic-mq".
 elasticMQDir := file("dir-name")
 ```
 
-Set the version of ElasticMQ to download. Defaults to "0.9.0-beta1"
+Set the version of ElasticMQ to download. Defaults to "0.9.0-beta1".
+
+NOTE: You can only create queues on startup in ElasticMQ versions `0.9.0-beta1` and above
 ```
-elasticMQVersion := "0.8.12"
+elasticMQVersion := "0.9.0-beta1"
 ```
 
 Set the URL to download ElasticMQ from. Defaults to "https://s3-eu-west-1.amazonaws.com/softwaremill-public/elasticmq-server-${elasticMQVersion.value}.jar"
