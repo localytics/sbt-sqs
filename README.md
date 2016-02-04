@@ -2,6 +2,8 @@ sbt-sqs
 ==============
 Support for running [ElasitcMQ](https://github.com/adamw/elasticmq) in tests.
 
+[![MIT license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](LICENSE) 
+
 Installation
 ------------
 Add the following to your `project/plugins.sbt` file:
