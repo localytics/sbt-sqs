@@ -8,7 +8,7 @@ Installation
 ------------
 Add the following to your `project/plugins.sbt` file:
 ```
-addSbtPlugin("com.localytics" % "sbt-sqs" % "0.1.0")
+addSbtPlugin("com.localytics" % "sbt-sqs" % "0.2.0")
 ```
 
 sbt 0.13.6+ is supported. 0.13.5 should work with the right bintray resolvers.
@@ -50,6 +50,12 @@ elasticMQUrl := "http://someurl.net"
 Set the name of the ElasticMQ jar. Defaults to "elasticmq-server-${elasticMQVersion.value}.jar"
 ```
 elasticMQFileName := myfilename.jar"
+```
+
+Set the JVM heap size (specified in MB). Defaults to the JVM default.
+
+```
+elasticMQHeapSize := Some(1024)
 ```
 
 **Node Address**
