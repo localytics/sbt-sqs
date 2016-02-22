@@ -28,10 +28,12 @@ object ElasticMQTasks {
       }
   }
 
-  def startElasticMQTask = (downloadElasticMQ, elasticMQDir, elasticMQFileName, nodeAddressConf, restSQSConf, queuesConf, streams) map {
-    case (_, jarDir, jarFile, nodeAddress, restSQS, queues, streamz) =>
-      val args = 
+  def startElasticMQTask = (downloadElasticMQ, elasticMQDir, elasticMQFileName, elasticMQHeapSize,
+                            nodeAddressConf, restSQSConf, queuesConf, streams) map {
+    case (_, jarDir, jarFile, heapSize, nodeAddress, restSQS, queues, streamz) =>
+      val args =
         Seq("java") ++
+        heapSize.map(mb => Seq(s"-Xms${mb}m", s"-Xmx${mb}m")).getOrElse(Nil) ++
         argsFromNodeAddress(nodeAddress) ++
         argsFromRestSQS(restSQS) ++
         argsFromQueues(queues) ++
@@ -65,13 +67,13 @@ object ElasticMQTasks {
       }
   }
 
-  private def argsFromNodeAddress(nodeAddress: NodeAddressConf): Seq[String] = 
+  private def argsFromNodeAddress(nodeAddress: NodeAddressConf): Seq[String] =
     Seq(s"-Dnode-address.protocol=${nodeAddress.protocol}",
         s"-Dnode-address.host=${nodeAddress.host}",
         s"-Dnode-address.port=${nodeAddress.port}",
         s"-Dnode-address.context-path=${nodeAddress.contextPath}")
 
-  private def argsFromRestSQS(restSQS: RestSQSConf): Seq[String] = 
+  private def argsFromRestSQS(restSQS: RestSQSConf): Seq[String] =
     Seq(s"-Drest-sqs.enabled=${restSQS.enabled}",
         s"-Drest-sqs.bind-port=${restSQS.bindPort}",
         s"-Drest-sqs.bind-hostname=${restSQS.bindHostname}",

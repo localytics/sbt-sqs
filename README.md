@@ -52,6 +52,12 @@ Set the name of the ElasticMQ jar. Defaults to "elasticmq-server-${elasticMQVers
 elasticMQFileName := myfilename.jar"
 ```
 
+Set the JVM heap size (specified in MB). Defaults to the JVM default.
+
+```
+elasticMQHeapSize := Some(1024)
+```
+
 **Node Address**
 
 The Node Address is the externally visible address for the ElasticMQ node. Defaults to a Node Address using
