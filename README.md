@@ -2,7 +2,7 @@ sbt-sqs
 ==============
 Support for running [ElasitcMQ](https://github.com/adamw/elasticmq) in tests.
 
-[![MIT license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](LICENSE) 
+[![MIT license](https://img.shields.io/badge/license-MIT%20License-blue.svg)](LICENSE)
 
 Installation
 ------------
@@ -63,7 +63,7 @@ elasticMQHeapSize := Some(1024)
 The Node Address is the externally visible address for the ElasticMQ node. Defaults to a Node Address using
 `protocol = "http"`, `host = "localhost"`, `port = 9324`, `context-path = ""`.
 ```
-nodeAddressConf := NodeAddressConf(protocol = "http", host = "localhost", port = 1111, context-path = "/queues/")
+nodeAddressConf := NodeAddressConf(protocol = "http", host = "localhost", port = 1111, contextPath = "/queues/")
 ```
 
 **Rest SQS**
@@ -87,4 +87,3 @@ queuesConf := Seq(QueueConf(name = "myFirstQueue"), QueueConf(name = "second", d
 Thanks
 ------
 Thanks to [Adam Warski](https://github.com/adamw) for the excellent [ElasticMQ](https://github.com/adamw/elasticmq)!
-
