@@ -56,15 +56,22 @@ object ElasticMQTasks {
   }
 
   def stopElasticMQTask = (streams) map {
-    case (streamz) =>
-      extractElasticMQPid match {
-        case Some(pid) =>
-          streamz.log.info("Stopping ElasticMQ")
-          killPidCommand(pid).!
-          ()
-        case None =>
-          streamz.log.warn("Cannot find ElasticMQ")
-      }
+    case (streamz) => stopElasticMQHelper(streamz)
+  }
+
+  def elasticMQTestCleanupTask = (streams) map {
+    case (streamz) => Tests.Cleanup(() => stopElasticMQHelper(streamz))
+  }
+
+  def stopElasticMQHelper(streamz: Keys.TaskStreams) = {
+    extractElasticMQPid match {
+      case Some(pid) =>
+        streamz.log.info("Stopping ElasticMQ")
+        killPidCommand(pid).!
+        ()
+      case None =>
+        streamz.log.warn("Cannot find ElasticMQ")
+    }
   }
 
   private def argsFromNodeAddress(nodeAddress: NodeAddressConf): Seq[String] =

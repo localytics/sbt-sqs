@@ -21,7 +21,7 @@ To have ElasticMQ automatically start and stop around your tests
 ```
 startElasticMQ <<= startElasticMQ.dependsOn(compile in Test)
 test in Test <<= (test in Test).dependsOn(startElasticMQ)
-(test in Test) <<= ((test in Test), stopElasticMQ) { (test, stop) => test doFinally stop }
+testOptions in Test <+= elasticMQTestCleanup
 ```
 
 `startElasticMQ` will download an ElasticMQ jar if one is not already present in the `elasticMQDir`.
