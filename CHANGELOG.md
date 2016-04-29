@@ -3,6 +3,10 @@ Change Log
 
 All notable changes to this project will be documented in this file.
 
+0.3.0 - 2016-04-28
+---------------------
+- Change test cleanup to support testOnly
+
 0.2.0 - 2016-02-22
 ---------------------
 * Add HeapSize configuration
