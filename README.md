@@ -8,7 +8,7 @@ Installation
 ------------
 Add the following to your `project/plugins.sbt` file:
 ```
-addSbtPlugin("com.localytics" % "sbt-sqs" % "0.2.0")
+addSbtPlugin("com.localytics" % "sbt-sqs" % "0.3.0")
 ```
 
 sbt 0.13.6+ is supported. 0.13.5 should work with the right bintray resolvers.
@@ -21,7 +21,8 @@ To have ElasticMQ automatically start and stop around your tests
 ```
 startElasticMQ <<= startElasticMQ.dependsOn(compile in Test)
 test in Test <<= (test in Test).dependsOn(startElasticMQ)
-(test in Test) <<= ((test in Test), stopElasticMQ) { (test, stop) => test doFinally stop }
+testOptions in Test <+= elasticMQTestCleanup
+testOnly in Test <<= (testOnly in Test).dependsOn(startElasticMQ)
 ```
 
 `startElasticMQ` will download an ElasticMQ jar if one is not already present in the `elasticMQDir`.
