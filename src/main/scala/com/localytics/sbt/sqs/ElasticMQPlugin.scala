@@ -15,7 +15,7 @@ object ElasticMQPlugin extends AutoPlugin {
   // inject defaults via projectSettings
   override lazy val projectSettings = Seq(
 
-    elasticMQVersion        := "0.9.0-beta1",
+    elasticMQVersion        := "0.9.3",
     elasticMQDir            := file("elastic-mq"),
     elasticMQUrl            := s"https://s3-eu-west-1.amazonaws.com/softwaremill-public/elasticmq-server-${elasticMQVersion.value}.jar",
     elasticMQFileName       := s"elasticmq-server-${elasticMQVersion.value}.jar",
