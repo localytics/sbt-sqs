@@ -19,8 +19,8 @@ object ElasticMQKeys {
   lazy val restSQSConf             = settingKey[RestSQSConf]("The RestSQS configuration. Defaults to RestSQSConf(enabled = true, bindPort = 9324, bindHostname = \"0.0.0.0\", sqsLimits = \"strict\")")
   lazy val queuesConf              = settingKey[Seq[QueueConf]]("QueueConfs to initialize queues on startup. No queues are created by default. QueueConf(name, visibilityTimeoutSecs = 10, delaySecs = 5, receivedMessageWaitSecs = 0)")
 
-  lazy val downloadElasticMQ       = TaskKey[Unit]("download-elastic-mq")
-  lazy val startElasticMQ          = TaskKey[Unit]("start-elastic-mq")
+  lazy val downloadElasticMQ       = TaskKey[File]("download-elastic-mq")
+  lazy val startElasticMQ          = TaskKey[String]("start-elastic-mq")
   lazy val stopElasticMQ           = TaskKey[Unit]("stop-elastic-mq")
   lazy val elasticMQTestCleanup    = TaskKey[Tests.Cleanup]("elastic-mq-test-cleanup")
 }
