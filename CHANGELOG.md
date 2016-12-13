@@ -3,6 +3,11 @@ Change Log
 
 All notable changes to this project will be documented in this file.
 
+0.4.0 - 2016-12-13
+---------------------
+- Refactor to best practices and SBT 1.0 syntax
+- Update to ElasticMQ 0.9.3
+
 0.3.0 - 2016-04-28
 ---------------------
 - Change test cleanup to support testOnly

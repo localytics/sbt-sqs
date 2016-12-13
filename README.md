@@ -8,7 +8,7 @@ Installation
 ------------
 Add the following to your `project/plugins.sbt` file:
 ```
-addSbtPlugin("com.localytics" % "sbt-sqs" % "0.3.0")
+addSbtPlugin("com.localytics" % "sbt-sqs" % "0.4.0")
 ```
 
 sbt 0.13.6+ is supported. 0.13.5 should work with the right bintray resolvers.
