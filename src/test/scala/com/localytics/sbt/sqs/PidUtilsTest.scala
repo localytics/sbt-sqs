@@ -15,7 +15,7 @@ class PidUtilsTest extends FunSpec with Matchers {
           |87496 sun.tools.jps.Jps
           |86379 /usr/local/Cellar/sbt/0.13.13/libexec/sbt-launch.jar
         """.stripMargin
-      PidUtils.extractElasticMQPid(jpsOutput) should equal(Some("86656"))
+      PidUtils.extractPid(jpsOutput) should equal(Some("86656"))
     }
 
   }

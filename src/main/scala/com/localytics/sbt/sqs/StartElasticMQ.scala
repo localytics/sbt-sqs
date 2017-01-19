@@ -29,7 +29,7 @@ object StartElasticMQ {
         Thread.sleep(500)
       } while (!isElasticMQRunning(restSQS.bindHostname, restSQS.bindPort))
     }
-    PidUtils.extractElasticMQPid("jps -l".!!).getOrElse {
+    PidUtils.extractPid("jps -l".!!).getOrElse {
       sys.error("Cannot find ElasticMQ PID")
     }
   }
