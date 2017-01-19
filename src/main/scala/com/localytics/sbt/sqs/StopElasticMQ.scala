@@ -1,6 +1,5 @@
 package com.localytics.sbt.sqs
 
-import com.localytics.sbt.PidUtils
 import sbt._
 
 object StopElasticMQ {

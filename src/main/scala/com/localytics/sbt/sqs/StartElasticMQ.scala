@@ -2,7 +2,6 @@ package com.localytics.sbt.sqs
 
 import java.io.File
 
-import com.localytics.sbt.PidUtils
 import com.localytics.sbt.sqs.ElasticMQKeys._
 import sbt.Keys._
 import sbt._
