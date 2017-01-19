@@ -2,7 +2,6 @@ package com.localytics.sbt.sqs
 
 import java.io.File
 
-import com.localytics.sbt.PidUtils
 import com.localytics.sbt.sqs.ElasticMQKeys._
 import sbt.Keys._
 import sbt._
@@ -30,7 +29,7 @@ object StartElasticMQ {
         Thread.sleep(500)
       } while (!isElasticMQRunning(restSQS.bindHostname, restSQS.bindPort))
     }
-    PidUtils.extractElasticMQPid("jps -l".!!).getOrElse {
+    PidUtils.extractPid("jps -l".!!).getOrElse {
       sys.error("Cannot find ElasticMQ PID")
     }
   }

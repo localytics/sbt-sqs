@@ -1,10 +1,10 @@
-package com.localytics.sbt
+package com.localytics.sbt.sqs
 
 object PidUtils {
 
   private val ProcessIdRegex = """\d+ .*elasticmq-server""".r
 
-  def extractElasticMQPid(input: String): Option[String] = ProcessIdRegex.findFirstIn(input).map(_.split(" ")(0))
+  def extractPid(input: String): Option[String] = ProcessIdRegex.findFirstIn(input).map(_.split(" ")(0))
 
   def osName: String = System.getProperty("os.name") match {
     case n: String if !n.isEmpty => n

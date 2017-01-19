@@ -1,6 +1,7 @@
 package com.localytics.sbt.sqs
 
 import java.io.File
+
 import sbt._
 
 object ElasticMQKeys {
