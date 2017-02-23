@@ -19,10 +19,10 @@ To use ElasticMQ in your project you can call `start-elastic-mq` and `stop-elast
 
 To have ElasticMQ automatically start and stop around your tests
 ```
-startElasticMQ <<= startElasticMQ.dependsOn(compile in Test)
-test in Test <<= (test in Test).dependsOn(startElasticMQ)
-testOptions in Test <+= elasticMQTestCleanup
-testOnly in Test <<= (testOnly in Test).dependsOn(startElasticMQ)
+startElasticMQ := startElasticMQ.dependsOn(compile in Test).value
+test in Test := (test in Test).dependsOn(startElasticMQ).value
+testOnly in Test := (testOnly in Test).dependsOn(startElasticMQ).value
+testOptions in Test += elasticMQTestCleanup.value
 ```
 
 `startElasticMQ` will download an ElasticMQ jar if one is not already present in the `elasticMQDir`.
