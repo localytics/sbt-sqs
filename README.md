@@ -85,6 +85,36 @@ Queues must be given a name and default to `visibilityTimeoutSecs = 10`, `delayS
 queuesConf := Seq(QueueConf(name = "myFirstQueue"), QueueConf(name = "second", delaySecs = 15))
 ```
 
+Scopes
+------
+
+By default this plugin lives entirely in the `Global` scope. However, different settings for different scopes is possible. For instance, you can add the plugin to the `Test` scope using
+
+```
+inConfig(Test)(baseElasticMQSettings)
+```
+
+You can then adjust the settings within the `Test` scope using
+
+```
+(elasticMQDir in Test) := file("in-test/elatic-mq")
+```
+
+and you can execute the plugin tasks within the `Test` scope using
+
+```
+sbt test:start-elastic-mq
+```
+
+Similarly, you can have the plugin automatically start and stop around your tests using
+
+```
+startElasticMQ in Test := (startElasticMQ in Test).dependsOn(compile in Test).value
+test in Test := (test in Test).dependsOn(startElasticMQ in Test).value
+testOnly in Test := (testOnly in Test).dependsOn(startElasticMQ in Test).value
+testOptions in Test += (elasticMQTestCleanup in Test).value
+```
+
 Thanks
 ------
 Thanks to [Adam Warski](https://github.com/adamw) for the excellent [ElasticMQ](https://github.com/adamw/elasticmq)!
