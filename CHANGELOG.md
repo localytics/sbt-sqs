@@ -3,6 +3,10 @@ Change Log
 
 All notable changes to this project will be documented in this file.
 
+0.4.2 - 2017-02-23
+---------------------
+- Enable different settings for different configurations
+
 0.4.1 - 2017-01-19
 ---------------------
 - Fix PidUtil class collision when using multiple localytics/sbt-* projects

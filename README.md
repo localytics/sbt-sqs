@@ -8,7 +8,7 @@ Installation
 ------------
 Add the following to your `project/plugins.sbt` file:
 ```
-addSbtPlugin("com.localytics" % "sbt-sqs" % "0.4.1")
+addSbtPlugin("com.localytics" % "sbt-sqs" % "0.4.2")
 ```
 
 sbt 0.13.6+ is supported. 0.13.5 should work with the right bintray resolvers.
@@ -19,10 +19,10 @@ To use ElasticMQ in your project you can call `start-elastic-mq` and `stop-elast
 
 To have ElasticMQ automatically start and stop around your tests
 ```
-startElasticMQ <<= startElasticMQ.dependsOn(compile in Test)
-test in Test <<= (test in Test).dependsOn(startElasticMQ)
-testOptions in Test <+= elasticMQTestCleanup
-testOnly in Test <<= (testOnly in Test).dependsOn(startElasticMQ)
+startElasticMQ := startElasticMQ.dependsOn(compile in Test).value
+test in Test := (test in Test).dependsOn(startElasticMQ).value
+testOnly in Test := (testOnly in Test).dependsOn(startElasticMQ).value
+testOptions in Test += elasticMQTestCleanup.value
 ```
 
 `startElasticMQ` will download an ElasticMQ jar if one is not already present in the `elasticMQDir`.
@@ -83,6 +83,36 @@ For ElasticMQ versions 0.9.0-beta1 and beyond, you can configure ElasticMQ to cr
 Queues must be given a name and default to `visibilityTimeoutSecs = 10`, `delaySecs = 5`, `receiveMessagWaitSecs = 0`.
 ```
 queuesConf := Seq(QueueConf(name = "myFirstQueue"), QueueConf(name = "second", delaySecs = 15))
+```
+
+Scopes
+------
+
+By default this plugin lives entirely in the `Global` scope. However, different settings for different scopes is possible. For instance, you can add the plugin to the `Test` scope using
+
+```
+inConfig(Test)(baseElasticMQSettings)
+```
+
+You can then adjust the settings within the `Test` scope using
+
+```
+(elasticMQDir in Test) := file("in-test/elatic-mq")
+```
+
+and you can execute the plugin tasks within the `Test` scope using
+
+```
+sbt test:start-elastic-mq
+```
+
+Similarly, you can have the plugin automatically start and stop around your tests using
+
+```
+startElasticMQ in Test := (startElasticMQ in Test).dependsOn(compile in Test).value
+test in Test := (test in Test).dependsOn(startElasticMQ in Test).value
+testOnly in Test := (testOnly in Test).dependsOn(startElasticMQ in Test).value
+testOptions in Test += (elasticMQTestCleanup in Test).value
 ```
 
 Thanks
