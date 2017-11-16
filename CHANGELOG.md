@@ -3,6 +3,22 @@ Change Log
 
 All notable changes to this project will be documented in this file.
 
+1.0.0 - 2017-11-16
+------------------
+- Support for SBT 1.0.0+.
+
+#### Breaking change
+
+`.value` should be changed to `.evaluated` on the `testOnly` task in `build.sbt`:
+Before:
+```scala
+testOnly in Test := (testOnly in Test).dependsOn(startElasticMQ in Test).value
+```
+After:
+```scala
+testOnly in Test := (testOnly in Test).dependsOn(startElasticMQ in Test).evaluated
+```
+
 0.4.2 - 2017-02-23
 ---------------------
 - Enable different settings for different configurations
