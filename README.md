@@ -6,12 +6,19 @@ Support for running [ElasitcMQ](https://github.com/adamw/elasticmq) in tests.
 
 Installation
 ------------
+
 Add the following to your `project/plugins.sbt` file:
 ```
-addSbtPlugin("com.localytics" % "sbt-sqs" % "0.4.2")
+addSbtPlugin("com.localytics" % "sbt-sqs" % "0.5.0")
 ```
 
-sbt 0.13.6+ is supported. 0.13.5 should work with the right bintray resolvers.
+sbt 1.0.0+ is supported by 0.5.0+ of this library.
+
+if using sbt 0.13.6+ the recommended version of this library is 0.4.2.
+
+sbt 0.13.5 should work with the right bintray resolvers.
+
+
 
 Usage
 -----
