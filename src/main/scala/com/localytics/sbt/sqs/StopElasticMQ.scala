@@ -1,6 +1,8 @@
 package com.localytics.sbt.sqs
 
-import sbt._
+import sbt.Keys
+
+import scala.sys.process._
 
 object StopElasticMQ {
 

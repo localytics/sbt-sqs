@@ -4,8 +4,8 @@ import java.io.File
 
 import com.localytics.sbt.sqs.ElasticMQKeys._
 import sbt.Keys._
-import sbt._
 
+import scala.sys.process._
 import scala.util.Try
 
 object StartElasticMQ {
