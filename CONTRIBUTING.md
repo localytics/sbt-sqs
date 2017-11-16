@@ -2,7 +2,7 @@
 
 Fork, then clone the repo:
 
-    git clone git@github.com:your-username/sbt-dynamodb.git
+    git clone git@github.com:your-username/sbt-sqs.git
 
 Create a new branch for your work:
 
