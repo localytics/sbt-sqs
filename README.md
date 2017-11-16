@@ -21,7 +21,7 @@ To have ElasticMQ automatically start and stop around your tests
 ```
 startElasticMQ := startElasticMQ.dependsOn(compile in Test).value
 test in Test := (test in Test).dependsOn(startElasticMQ).value
-testOnly in Test := (testOnly in Test).dependsOn(startElasticMQ).value
+testOnly in Test := (testOnly in Test).dependsOn(startElasticMQ).evaluated
 testOptions in Test += elasticMQTestCleanup.value
 ```
 
@@ -111,7 +111,7 @@ Similarly, you can have the plugin automatically start and stop around your test
 ```
 startElasticMQ in Test := (startElasticMQ in Test).dependsOn(compile in Test).value
 test in Test := (test in Test).dependsOn(startElasticMQ in Test).value
-testOnly in Test := (testOnly in Test).dependsOn(startElasticMQ in Test).value
+testOnly in Test := (testOnly in Test).dependsOn(startElasticMQ in Test).evaluated
 testOptions in Test += (elasticMQTestCleanup in Test).value
 ```
 
