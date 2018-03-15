@@ -7,7 +7,8 @@ import sbt._
 
 object ElasticMQKeys {
 
-  case class QueueConf(name: String, visibilityTimeoutSecs: Int = 10, delaySecs: Int = 5, receiveMessageWaitSecs: Int = 0)
+  case class DLQConf(name: String, maxReceiveCount: Int)
+  case class QueueConf(name: String, visibilityTimeoutSecs: Int = 10, delaySecs: Int = 5, receiveMessageWaitSecs: Int = 0, deadLettersQueue: Option[DLQConf] = None)
   case class NodeAddressConf(protocol: String = "http", host: String = "localhost", port: Int = 9324, contextPath: String = "")
   case class RestSQSConf(enabled: Boolean = true, bindPort: Int = 9324, bindHostname: String = "0.0.0.0", sqsLimits: String = "strict")
 

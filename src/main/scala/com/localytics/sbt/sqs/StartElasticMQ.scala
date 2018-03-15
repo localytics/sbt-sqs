@@ -46,13 +46,20 @@ object StartElasticMQ {
       s"-Drest-sqs.bind-hostname=${restSQS.bindHostname}",
       s"-Drest-sqs.sqs-limits=${restSQS.sqsLimits}")
 
-  private def argsFromQueues(queues: Seq[QueueConf]): Seq[String] =
+  private def argsFromQueues(queues: Seq[QueueConf]): Seq[String] = {
+    def getDlqSeq(queue: QueueConf): Seq[String] = {
+      val dlqName = queue.deadLettersQueue.map(dlq => Seq(s"-Dqueues.${queue.name}.deadLettersQueue.name=${dlq.name}")).getOrElse(Seq.empty[String])
+      val dlqMaxReceiveCount = queue.deadLettersQueue.map(dlq => Seq(s"-Dqueues.${queue.name}.deadLettersQueue.maxReceiveCount=${dlq.maxReceiveCount}")).getOrElse(Seq.empty[String])
+      dlqName ++ dlqMaxReceiveCount
+    }
     queues.foldLeft(Seq[String]()) { case (seq, queue) =>
       seq ++
         Seq(s"-Dqueues.${queue.name}.defaultVisibilityTimeout=${queue.visibilityTimeoutSecs} seconds",
           s"-Dqueues.${queue.name}.delay=${queue.delaySecs} seconds",
-          s"-Dqueues.${queue.name}.receiveMessageWait=${queue.receiveMessageWaitSecs} seconds")
+          s"-Dqueues.${queue.name}.receiveMessageWait=${queue.receiveMessageWaitSecs} seconds"
+          ) ++ getDlqSeq(queue)
     }
+  }
 
   private def isElasticMQRunning(endpoint: String, port: Int): Boolean = Try(new java.net.Socket(endpoint, port).close()).isSuccess
 
